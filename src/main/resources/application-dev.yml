@@ -1,0 +1,25 @@
+# =================================
+# = Server
+# =================================
+server:
+  port: 8080
+  servlet:
+    context-path: /v1/cadastro-clientes
+
+# =================================
+# = Spring
+# =================================
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cliente
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

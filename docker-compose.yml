@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+  cliente-network:
+    driver: bridge
+
+services:
+  cliente-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "cliente"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    networks:
+      - cliente-network
+
+  cliente-api:
+    build: .
+    image: cliente-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://cliente-db:3306/cliente
+    ports:
+      - "8080:8080"
+
+    networks:
+      - cliente-network
+    depends_on:
+      - cliente-db
